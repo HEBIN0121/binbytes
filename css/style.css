@@ -186,6 +186,113 @@ body {
     background: var(--bg-color);
 }
 
+/* 工具布局 */
+.tools-layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* 工具侧边栏 */
+.tools-sidebar {
+    background: var(--bg-light);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+    max-height: 80vh;
+    position: sticky;
+    top: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.sidebar-header h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-category {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    border-left: 3px solid transparent;
+    position: relative;
+}
+
+.sidebar-category:hover {
+    background: var(--hover-bg);
+    color: var(--text-color);
+    border-left-color: var(--primary-color);
+    transform: translateX(3px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-category.active {
+    background: var(--primary-color);
+    color: white;
+    border-left-color: var(--secondary-color);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+}
+
+.sidebar-category.active:hover {
+    background: var(--secondary-color);
+    transform: translateX(3px);
+}
+
+/* 工具内容区域 */
+.tools-content {
+    min-height: 400px;
+}
+
+/* 工具分类切换按钮（移动端） */
+.tools-toggle-btn {
+    display: none;
+    width: 100%;
+    padding: 1rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tools-toggle-btn:hover {
+    background: var(--secondary-color);
+}
+
+.tools-toggle-btn.active .toggle-icon {
+    transform: rotate(180deg);
+}
+
+/* 工具分类动画 */
+.tool-category {
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .section-title {
     text-align: center;
     font-size: 2.5rem;
@@ -209,7 +316,7 @@ body {
 
 .tools-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
 }
@@ -447,6 +554,10 @@ body {
     color: #9ca3af;
 }
 
+.footer-bottom p {
+    font-size: 0.65rem;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
     .nav-menu {
@@ -478,9 +589,16 @@ body {
         border-radius: 0 0 var(--border-radius) var(--border-radius);
     }
     
-    .tools-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
+    .tools-content .tools-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    /* 所有分类占满整行 */
+    .tools-content .tools-grid .tool-category {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
     .about-content {
@@ -527,9 +645,6 @@ body {
         font-size: 2rem;
     }
     
-    .tool-category {
-        margin: 0 10px;
-    }
 }
 
 /* 滚动行为 */
@@ -712,8 +827,8 @@ html {
 /* 影视模块响应式设计 */
 @media (max-width: 768px) {
     .movie-grid {
-        grid-template-columns: 1fr;
-        gap: 0.75rem;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
     }
     
     .movie-item {
@@ -736,13 +851,15 @@ html {
     }
     
     .subnav-tabs {
-        flex-direction: column;
+        flex-direction: row;
         gap: 0.25rem;
     }
     
     .subnav-tab {
         text-align: center;
         padding: 0.5rem;
+        flex: 1;
+        font-size: 0.8rem;
     }
 }
 
@@ -753,6 +870,17 @@ html {
     
     .movie-subnav {
         padding: 0.75rem 1rem 0;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .subnav-tab {
+        flex: 1;
+        min-width: 80px;
+        text-align: center;
+        font-size: 0.8rem;
+        padding: 0.5rem 0.75rem;
     }
     
     .movie-item {
@@ -794,5 +922,376 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
+}
+
+/* 侧边栏滚动条样式 */
+.mobile-sidebar::-webkit-scrollbar,
+.tools-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.mobile-sidebar::-webkit-scrollbar-track,
+.tools-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.mobile-sidebar::-webkit-scrollbar-thumb,
+.tools-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(59, 130, 246, 0.3);
+    border-radius: 3px;
+}
+
+.mobile-sidebar::-webkit-scrollbar-thumb:hover,
+.tools-sidebar::-webkit-scrollbar-thumb:hover {
+    background: rgba(59, 130, 246, 0.6);
+}
+
+/* 移动端菜单按钮 */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-color);
+    margin: 3px 0;
+    transition: var(--transition);
+    border-radius: 2px;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* 移动端侧边栏 */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -300px;
+    width: 300px;
+    height: 100vh;
+    background: var(--bg-color);
+    border-right: 1px solid var(--border-color);
+    z-index: 1000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.mobile-sidebar.active {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+.sidebar-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.sidebar-close:hover {
+    background: var(--hover-bg);
+}
+
+.sidebar-menu {
+    padding: 1rem 0;
+}
+
+.sidebar-link {
+    display: block;
+    padding: 1rem 1.5rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    position: relative;
+}
+
+.sidebar-link:hover {
+    background: var(--hover-bg);
+    border-left-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.sidebar-link.active {
+    background: var(--primary-color);
+    color: white;
+    border-left-color: var(--secondary-color);
+}
+
+.sidebar-link.active:hover {
+    background: var(--secondary-color);
+    transform: translateX(5px);
+}
+
+/* 侧边栏遮罩 */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 移动端响应式调整 */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    .tools-collection .tools-list {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* 影视娱乐工具列表多列布局 */
+    .movie-category .tools-list {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* 工具分类移动端样式调整 */
+    
+    .tool-category {
+        margin-bottom: 1rem;
+    }
+    
+    .category-header {
+        padding: 1rem;
+    }
+    
+    .category-header h3 {
+        font-size: 1rem;
+    }
+    
+    .category-header p {
+        font-size: 0.8rem;
+    }
+    
+    .tools-list {
+        padding: 1rem;
+    }
+    
+    .tool-item {
+        padding: 0.4rem;
+        font-size: 0.75rem;
+    }
+    
+    .tool-icon {
+        font-size: 0.8rem;
+    }
+    
+    .tool-name {
+        font-size: 0.75rem;
+    }
+    
+    .tool-desc {
+        font-size: 0.65rem;
+    }
+    
+    /* 工具列表多列布局 */
+    .tools-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+    
+    /* 工具布局移动端调整 - 隐藏侧边栏 */
+    .tools-layout {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .tools-toggle-btn {
+        display: flex;
+    }
+    
+    .tools-sidebar {
+        display: none;
+        position: static;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        background: var(--bg-light);
+        border-radius: 8px;
+    }
+    
+    .tools-sidebar.active {
+        display: block;
+    }
+    
+    .sidebar-header h3 {
+        font-size: 1rem;
+    }
+    
+    .sidebar-category {
+        font-size: 0.8rem;
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+/* 超小屏幕调整 */
+@media (max-width: 480px) {
+    .tools-layout {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .tools-toggle-btn {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .tools-sidebar {
+        padding: 0.8rem;
+    }
+    
+    .sidebar-header h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.8rem;
+    }
+    
+    .sidebar-category {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.6rem;
+    }
+    
+    .tools-content {
+        min-height: 300px;
+    }
+    
+    /* 工具分类超小屏幕样式调整 */
+    .tools-content .tools-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* 所有分类占满整行 */
+    .tools-content .tools-grid .tool-category {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .tool-category {
+        margin-bottom: 0.8rem;
+    }
+    
+    .category-header {
+        padding: 0.8rem;
+    }
+    
+    .category-header h3 {
+        font-size: 0.9rem;
+    }
+    
+    .category-header p {
+        font-size: 0.7rem;
+    }
+    
+    .tools-list {
+        padding: 0.8rem;
+    }
+    
+    .tool-item {
+        padding: 0.3rem;
+        font-size: 0.7rem;
+    }
+    
+    .tool-icon {
+        font-size: 0.75rem;
+    }
+    
+    .tool-name {
+        font-size: 0.7rem;
+    }
+    
+    .tool-desc {
+        font-size: 0.6rem;
+    }
+    
+    /* 工具列表三列布局 */
+    .tools-list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.4rem;
+    }
+    
+    /* 在线工具收藏和影视娱乐三列布局 */
+    .tools-collection .tools-list,
+    .movie-category .tools-list {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.4rem !important;
+    }
+    
+    /* 影视娱乐三列布局 */
+    .movie-grid {
+        grid-template-columns: repeat(3, 1fr) !important;
+        gap: 0.4rem !important;
+    }
+    
+    /* 影视娱乐移动端水平布局优化 */
+    .movie-subnav {
+        flex-direction: row;
+        gap: 0.3rem;
+    }
+    
+    .subnav-tab {
+        flex: 1;
+        min-width: 70px;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+    }
 }
 

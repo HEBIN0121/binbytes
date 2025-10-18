@@ -217,6 +217,135 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // 移动端侧边栏功能
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileSidebar = document.getElementById('mobileSidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    const sidebarClose = document.getElementById('sidebarClose');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+    // 打开侧边栏
+    mobileMenuToggle.addEventListener('click', function() {
+        mobileSidebar.classList.add('active');
+        sidebarOverlay.classList.add('active');
+        mobileMenuToggle.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // 关闭侧边栏
+    function closeSidebar() {
+        mobileSidebar.classList.remove('active');
+        sidebarOverlay.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    sidebarClose.addEventListener('click', closeSidebar);
+    sidebarOverlay.addEventListener('click', closeSidebar);
+
+    // 侧边栏链接点击处理
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            // 更新活动状态
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 如果是工具分类链接，切换对应的工具分类
+            const category = this.getAttribute('data-category');
+            if (category) {
+                // 更新工具分类侧边栏的活动状态
+                const toolCategories = document.querySelectorAll('.sidebar-category');
+                toolCategories.forEach(c => c.classList.remove('active'));
+                const targetCategory = document.querySelector(`.sidebar-category[data-category="${category}"]`);
+                if (targetCategory) {
+                    targetCategory.classList.add('active');
+                }
+                
+                // 显示/隐藏对应的工具分类
+                const toolCategorySections = document.querySelectorAll('.tool-category');
+                toolCategorySections.forEach(section => {
+                    const sectionCategory = section.getAttribute('data-category');
+                    
+                    if (category === 'all' || sectionCategory === category) {
+                        section.style.display = 'block';
+                        section.style.opacity = '0';
+                        section.style.transform = 'translateY(30px)';
+                        
+                        // 添加动画效果
+                        requestAnimationFrame(() => {
+                            section.style.opacity = '1';
+                            section.style.transform = 'translateY(0)';
+                        });
+                    } else {
+                        section.style.opacity = '0';
+                        section.style.transform = 'translateY(-20px)';
+                        setTimeout(() => {
+                            section.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+            
+            // 关闭侧边栏
+            closeSidebar();
+        });
+    });
+
+    // 工具分类侧边栏功能
+    const toolCategories = document.querySelectorAll('.sidebar-category');
+    const toolCategorySections = document.querySelectorAll('.tool-category');
+    const toolsToggleBtn = document.getElementById('toolsToggleBtn');
+    const toolsSidebar = document.getElementById('toolsSidebar');
+
+    // 移动端侧边栏切换功能
+    if (toolsToggleBtn && toolsSidebar) {
+        toolsToggleBtn.addEventListener('click', function() {
+            toolsSidebar.classList.toggle('active');
+            this.classList.toggle('active');
+        });
+    }
+
+    toolCategories.forEach(category => {
+        category.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // 更新活动状态
+            toolCategories.forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            
+            const targetCategory = this.getAttribute('data-category');
+            
+            // 显示/隐藏对应的工具分类
+            toolCategorySections.forEach(section => {
+                const sectionCategory = section.getAttribute('data-category');
+                
+                if (targetCategory === 'all' || sectionCategory === targetCategory) {
+                    section.style.display = 'block';
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(30px)';
+                    
+                    // 添加动画效果
+                    requestAnimationFrame(() => {
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    });
+                } else {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(-20px)';
+                    setTimeout(() => {
+                        section.style.display = 'none';
+                    }, 300);
+                }
+            });
+            
+            // 移动端选择分类后自动隐藏侧边栏
+            if (window.innerWidth <= 768 && toolsSidebar) {
+                toolsSidebar.classList.remove('active');
+                toolsToggleBtn.classList.remove('active');
+            }
+        });
+    });
+
     // 页面加载完成后的初始化
     setTimeout(() => {
         // 添加页面加载完成的类

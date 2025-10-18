@@ -18,12 +18,17 @@
                 <div class="nav-logo">
                     <h1>🔧 BIN工具箱</h1>
                 </div>
-                <div class="nav-menu">
-                    <a href="#home" class="nav-link active">首页</a>
-                    <a href="#tools" class="nav-link">工具</a>
-                    <a href="#about" class="nav-link">关于</a>
-                    <a href="#contact" class="nav-link">联系</a>
-                </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active">首页</a>
+                <a href="#tools" class="nav-link">工具</a>
+                <a href="#about" class="nav-link">关于</a>
+                <a href="#contact" class="nav-link">联系</a>
+            </div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
                 <div class="nav-toggle">
                     <span></span>
                     <span></span>
@@ -31,6 +36,33 @@
                 </div>
             </div>
         </nav>
+        
+        <!-- 移动端侧边栏 -->
+        <div class="mobile-sidebar" id="mobileSidebar">
+            <div class="sidebar-header">
+                <h2>🔧 BIN工具箱</h2>
+                <button class="sidebar-close" id="sidebarClose">×</button>
+            </div>
+            <div class="sidebar-menu">
+                <a href="#home" class="sidebar-link active">首页</a>
+                <a href="#tools" class="sidebar-link" data-category="all">全部工具</a>
+                <a href="#tools" class="sidebar-link" data-category="development">开发工具</a>
+                <a href="#tools" class="sidebar-link" data-category="design">设计工具</a>
+                <a href="#tools" class="sidebar-link" data-category="conversion">转换工具</a>
+                <a href="#tools" class="sidebar-link" data-category="text">文本工具</a>
+                <a href="#tools" class="sidebar-link" data-category="image">图片工具</a>
+                <a href="#tools" class="sidebar-link" data-category="study">学习与资料</a>
+                <a href="#tools" class="sidebar-link" data-category="api">API 接口</a>
+                <a href="#tools" class="sidebar-link" data-category="embedded">嵌入式开发</a>
+                <a href="#tools" class="sidebar-link" data-category="tools-collection">在线工具收藏</a>
+                <a href="#tools" class="sidebar-link" data-category="entertainment">影视娱乐</a>
+                <a href="#about" class="sidebar-link">关于</a>
+                <a href="#contact" class="sidebar-link">联系</a>
+            </div>
+        </div>
+        
+        <!-- 侧边栏遮罩 -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
     </header>
 
     <!-- 主要内容 -->
@@ -51,10 +83,39 @@
         <section id="tools" class="tools-section">
             <div class="container">
                 <h2 class="section-title">工具分类</h2>
-                <div class="tools-grid">
+                <div class="tools-layout">
+                    <!-- 工具分类切换按钮（移动端） -->
+                    <button class="tools-toggle-btn" id="toolsToggleBtn">
+                        <span>工具分类</span>
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    
+                    <!-- 工具分类侧边栏 -->
+                    <div class="tools-sidebar" id="toolsSidebar">
+                        <div class="sidebar-header">
+                            <h3>工具分类</h3>
+                        </div>
+                        <div class="sidebar-menu">
+                            <a href="#tools" class="sidebar-category active" data-category="all">全部工具</a>
+                            <a href="#tools" class="sidebar-category" data-category="development">开发工具</a>
+                            <a href="#tools" class="sidebar-category" data-category="design">设计工具</a>
+                            <a href="#tools" class="sidebar-category" data-category="conversion">转换工具</a>
+                            <a href="#tools" class="sidebar-category" data-category="text">文本工具</a>
+                            <a href="#tools" class="sidebar-category" data-category="image">图片工具</a>
+                            <a href="#tools" class="sidebar-category" data-category="study">学习与资料</a>
+                            <a href="#tools" class="sidebar-category" data-category="api">API 接口</a>
+                            <a href="#tools" class="sidebar-category" data-category="embedded">嵌入式开发</a>
+                            <a href="#tools" class="sidebar-category" data-category="tools-collection">在线工具收藏</a>
+                            <a href="#tools" class="sidebar-category" data-category="entertainment">影视娱乐</a>
+                        </div>
+                    </div>
+                    
+                    <!-- 工具内容区域 -->
+                    <div class="tools-content">
+                        <div class="tools-grid">
                     
                     <!-- 开发工具 -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="development">
                         <div class="category-header">
                             <h3>💻 开发工具</h3>
                             <p>程序开发相关的实用工具</p>
@@ -84,7 +145,7 @@
                     </div>
 
                     <!-- 设计工具 -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="design">
                         <div class="category-header">
                             <h3>🎨 设计工具</h3>
                             <p>图像和设计相关的工具</p>
@@ -114,7 +175,7 @@
                     </div>
 
                     <!-- 转换工具 -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="conversion">
                         <div class="category-header">
                             <h3>🔄 转换工具</h3>
                             <p>各种格式转换工具</p>
@@ -144,7 +205,7 @@
                     </div>
 
                     <!-- 文本工具 -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="text">
                         <div class="category-header">
                             <h3>📝 文本工具</h3>
                             <p>文本处理和编辑工具</p>
@@ -174,7 +235,7 @@
                     </div>
 
                     <!-- 系统工具 -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="image">
                         <div class="category-header">
                             <h3>⚙️ 系统工具</h3>
                             <p>系统和网络相关工具</p>
@@ -204,7 +265,7 @@
                     </div>
 
                     <!-- 学习工具 -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="study">
                         <div class="category-header">
                             <h3>📚 学习工具</h3>
                             <p>教育和学习相关工具</p>
@@ -234,7 +295,7 @@
                     </div>
 
                     <!-- 学习与资料（来自 favorites → STUDY） -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="study">
                         <div class="category-header">
                             <h3>📖 学习与资料</h3>
                             <p>学习路线、文档与常用学习入口</p>
@@ -309,7 +370,7 @@
                     </div>
 
                     <!-- API 接口（来自 favorites → STUDY → API） -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="api">
                         <div class="category-header">
                             <h3>🧩 API 接口</h3>
                             <p>天气与AI相关常用开放接口</p>
@@ -344,7 +405,7 @@
                     </div>
 
                     <!-- 嵌入式开发（来自 favorites → 嵌入式开发） -->
-                    <div class="tool-category">
+                    <div class="tool-category" data-category="embedded">
                         <div class="category-header">
                             <h3>🔧 嵌入式开发</h3>
                             <p>嵌入式资料与练习入口</p>
@@ -389,7 +450,7 @@
                     </div>
 
                     <!-- 在线工具收藏（来自 favorites → 工具箱） -->
-                    <div class="tool-category tools-collection">
+                    <div class="tool-category tools-collection" data-category="tools-collection">
                         <div class="category-header">
                             <h3>🧰 在线工具收藏</h3>
                             <p>高频在线工具与开发者入口</p>
@@ -644,7 +705,7 @@
                     </div>
 
                     <!-- 影视娱乐 -->
-                    <div class="tool-category movie-category">
+                    <div class="tool-category movie-category" data-category="entertainment">
                         <div class="category-header">
                             <h3>🎬 影视娱乐</h3>
                             <p>在线影视观看和资源下载</p>
@@ -1083,6 +1144,8 @@
                         </div>
                     </div>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1145,7 +1208,7 @@
                     <ul class="contact-list">
                         <li class="contact-item">
                             <img class="contact-icon" src="images/github-fill.svg" alt="GitHub">
-                            <a href="https://github.com/HEBIN0121/binbytes" target="_blank" rel="noopener">GitHub</a>
+                            <a href="https://t.me/bin_toolbox" target="_blank" rel="noopener">GitHub</a>
                         </li>
                         <li class="contact-item">
                             <img class="contact-icon" src="images/gmail.svg" alt="Email">

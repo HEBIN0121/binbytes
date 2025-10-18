@@ -55,7 +55,7 @@
 
 1. 克隆项目到本地
 ```bash
-git clone https://github.com/HEBIN0121/binbytes.git
+git clone https://github.com/yourusername/BIN工具箱网站.git
 cd BIN工具箱网站
 ```
 
@@ -80,7 +80,7 @@ php -S localhost:8000
 1. Fork 这个仓库
 2. 在仓库设置中启用 GitHub Pages
 3. 选择 `main` 分支作为发布源
-4. 访问 `https://HEBIN0121/binbytes.github.io/`
+4. 访问 `https://yourusername.github.io/BIN工具箱网站/`
 
 ## 📁 项目结构
 
@@ -159,8 +159,8 @@ BIN工具箱网站/
 
 如有问题或建议，请通过以下方式联系：
 
-- 提交 [Issue](https://github.com/HEBIN0121/binbytes/issues)
-- 发送邮件到：hebinbytes@gmail.com
+- 提交 [Issue](https://github.com/yourusername/BIN工具箱网站/issues)
+- 发送邮件到：your-email@example.com
 
 ---
 
