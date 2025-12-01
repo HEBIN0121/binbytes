@@ -957,7 +957,8 @@ html {
 .mobile-menu-toggle span {
     width: 25px;
     height: 3px;
-    background: var(--text-color);
+    /* background: var(--text-color); */
+    background-color: white;
     margin: 3px 0;
     transition: var(--transition);
     border-radius: 2px;
