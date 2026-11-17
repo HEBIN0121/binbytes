@@ -1295,3 +1295,135 @@ html {
     }
 }
 
+/* ===== Logo 链接重置 ===== */
+.logo-link {
+    color: inherit;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sidebar-logo-link {
+    color: inherit;
+}
+
+/* ===== 资源下载站页面 ===== */
+.downloads-section {
+    padding: 3rem 0;
+    background: var(--bg-light);
+    min-height: calc(100vh - 160px);
+}
+
+.downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+}
+
+.download-card {
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: var(--transition);
+}
+
+.download-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.download-card-top {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.download-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    flex-shrink: 0;
+}
+
+.download-card-title h3 {
+    font-size: 1.15rem;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+}
+
+.download-version {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.download-desc {
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.download-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.download-tag {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 6px;
+    padding: 0.25rem 0.6rem;
+}
+
+.download-card-bottom {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.download-btn {
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    padding: 0.8rem 1.2rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.download-btn:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+}
+
+.download-alt {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    word-break: break-all;
+}
+
+@media (max-width: 480px) {
+    .downloads-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .download-card {
+        padding: 1.25rem;
+    }
+}
+
